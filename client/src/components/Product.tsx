@@ -1,6 +1,6 @@
-import type { ProductItem } from "../types/product"
+import type { ProductProps } from "../types/product"
 
-const Product = (product: ProductItem) => {
+const Product = ({product}: ProductProps) => {
 
   return (
     <div className="flex justify-between">

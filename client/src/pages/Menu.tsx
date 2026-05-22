@@ -14,7 +14,7 @@ const Menu = () => {
             <p className="text-2xl text-amber-400">{category}</p>
             {menuProducts.filter((product) => product.category === category)
               .map((product) => (
-                <Product key={product.id} title={product.title} price={product.price} />
+                <Product key={product.id} product={product} />
               ))}
           </div>
         ))}
