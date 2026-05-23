@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div className="flex justify-center items-center min-h-dvh bg-black p-2">
+    <div className="flex justify-center items-center min-h-dvh p-2">
       <div className="flex flex-col text-center gap-3">
         <h1 className="text-4xl text-amber-400">Welcome to Quck Bite</h1>
         <img src={homeImg} alt="home-img" className="rounded-lg" />
