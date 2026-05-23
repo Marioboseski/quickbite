@@ -21,28 +21,30 @@ const Orders = () => {
   }
 
   return (
-    <div>
-      <h2 className="text-3xl text-amber-400">Orders</h2>
+    <div className="flex flex-col text-center gap-3 p-2">
+      <h2 className="text-3xl">Orders</h2>
 
       {categories.map((category) => (
-        <div key={category}>
+        <div key={category} className="flex flex-col gap-3">
 
-          <h3>{category}</h3>
+          <h3 className="text-xl text-amber-400">{category}</h3>
 
-          {menuProducts.filter((product) => product.category === category)
-            .map((product) => (
+          <div className="flex flex-col items-center gap-3">
+            {menuProducts.filter((product) => product.category === category)
+              .map((product) => (
 
-              <OrderProduct
-                key={product.id}
-                orderProduct={{
-                  ...product,
-                  quantity: quantites[product.id] || 0,
-                  onIncrease: () => increaseQuantity(product.id),
-                  onDecrease: () => decreaseQuantity(product.id),
-                }}
-              />
+                <OrderProduct
+                  key={product.id}
+                  orderProduct={{
+                    ...product,
+                    quantity: quantites[product.id] || 0,
+                    onIncrease: () => increaseQuantity(product.id),
+                    onDecrease: () => decreaseQuantity(product.id),
+                  }}
+                />
 
-            ))}
+              ))}
+          </div>
         </div>
       ))}
     </div>
