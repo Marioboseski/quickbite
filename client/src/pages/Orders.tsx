@@ -16,7 +16,7 @@ const Orders = () => {
 
   const decreaseQuantity = (id: number) => {
     setQuantities((prev) => ({
-      ...prev, [id]: Math.max((prev[id] || 0) - 1)
+      ...prev, [id]: Math.max((prev[id] || 0) - 1,0)
     }))
   }
 
