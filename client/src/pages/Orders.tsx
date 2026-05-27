@@ -1,24 +1,12 @@
 import { menuProducts } from "../data/menuData";
 import OrderProduct from "../components/OrderProduct";
-import { useState } from "react";
+import { useCart } from "../context/CartContext";
 
 const Orders = () => {
 
+  const { addToCart, cartItems } = useCart();
+
   const categories = ["Burgers", "Gyros", "Drinks", "Sides"];
-
-  const [quantites, setQuantities] = useState<Record<number, number>>({});
-
-  const increaseQuantity = (id: number) => {
-    setQuantities((prev) => ({
-      ...prev, [id]: (prev[id] || 0) + 1
-    }));
-  }
-
-  const decreaseQuantity = (id: number) => {
-    setQuantities((prev) => ({
-      ...prev, [id]: Math.max((prev[id] || 0) - 1,0)
-    }))
-  }
 
   return (
     <div className="flex flex-col text-center gap-3 p-2">
@@ -31,19 +19,22 @@ const Orders = () => {
 
           <div className="flex flex-col items-center gap-3">
             {menuProducts.filter((product) => product.category === category)
-              .map((product) => (
+              .map((product) => {
 
-                <OrderProduct
-                  key={product.id}
-                  orderProduct={{
-                    ...product,
-                    quantity: quantites[product.id] || 0,
-                    onIncrease: () => increaseQuantity(product.id),
-                    onDecrease: () => decreaseQuantity(product.id),
-                  }}
-                />
+                const currentItem = cartItems.find((item) => item.id === product.id);
 
-              ))}
+                return (
+                  <OrderProduct
+                    key={product.id}
+                    orderProduct={{
+                      ...product,
+                      quantity: currentItem?.quantity || 0,
+                      onIncrease: () => addToCart(product),
+                      onDecrease: () => {},
+                    }}
+                  />
+                )
+              })}
           </div>
         </div>
       ))}
