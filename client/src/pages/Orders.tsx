@@ -4,7 +4,7 @@ import { useCart } from "../context/CartContext";
 
 const Orders = () => {
 
-  const { addToCart, cartItems } = useCart();
+  const { addToCart, decreaseQuantity, cartItems } = useCart();
 
   const categories = ["Burgers", "Gyros", "Drinks", "Sides"];
 
@@ -30,7 +30,7 @@ const Orders = () => {
                       ...product,
                       quantity: currentItem?.quantity || 0,
                       onIncrease: () => addToCart(product),
-                      onDecrease: () => {},
+                      onDecrease: () => decreaseQuantity(product.id),
                     }}
                   />
                 )
