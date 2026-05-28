@@ -1,16 +1,19 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 
-export type CartItem = {
+export type Product = {
   id: number,
   title: string,
   price: number,
-  category: string,
+  category: string
+}
+
+export type CartItem = Product & {
   quantity: number
 }
 
 type CartContextType = {
   cartItems: CartItem[],
-  addToCart: (product: Omit<CartItem, "quantity">) => void,
+  addToCart: (product: Product) => void,
   decreaseQuantity: (id: number) => void
 }
 
@@ -23,7 +26,7 @@ type CartProviderProps = {
 const CartProvider = ({ children }: CartProviderProps) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
-  const addToCart = (product: Omit<CartItem, "quantity">) => {
+  const addToCart = (product: Product) => {
     setCartItems((prev) => {
       const existingProduct = prev.find((item) => item.id === product.id);
 
