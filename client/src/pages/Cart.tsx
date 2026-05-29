@@ -3,6 +3,10 @@ import { useCart } from "../context/CartContext";
 const Cart = () => {
   const { cartItems, addToCart, decreaseQuantity } = useCart();
 
+  const totalPrice = cartItems.reduce((total, item) => {
+    return total + item.price * item.quantity;
+  }, 0);
+
   return (
     <div className="flex flex-col items-center gap-3">
       <h2 className="text-3xl text-amber-400">Cart</h2>
@@ -27,6 +31,13 @@ const Cart = () => {
           </div>
         ))
       )}
+      <div className="flex flex-col gap-3 p-2 border-t w-full">
+        <h3 className="text-3xl text-center">Cart Review</h3>
+        <div className="flex justify-between items-center">
+          <p className="text-xl">Total</p>
+          <p className="text-xl">${totalPrice.toFixed(2)}</p>
+        </div>
+      </div>
     </div>
   );
 }
