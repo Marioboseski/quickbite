@@ -1,5 +1,12 @@
 import { useState } from "react";
 import { useCart } from "../context/CartContext";
+import { validateFullName, validateAddress, validatePhoneNumber } from "../utils/validators";
+
+type FormErrors = {
+  fullName: string,
+  phoneNumber: string,
+  address: string
+}
 
 const Checkout = () => {
 
@@ -12,6 +19,24 @@ const Checkout = () => {
   const [fullName, setFullName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [address, setAddress] = useState("");
+  const [errors, setErrors] = useState<FormErrors>({
+    fullName: "",
+    phoneNumber: "",
+    address: ""
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const newErrors = {
+      fullName: validateFullName(fullName),
+      phoneNumber: validatePhoneNumber(phoneNumber),
+      address: validateAddress(address)
+    }
+
+    setErrors(newErrors);
+
+  }
 
   return (
     <div className="flex flex-col gap-3 p-2">
@@ -29,25 +54,28 @@ const Checkout = () => {
       </div>
 
       <div className="flex justify-center items-center">
-        <form className="flex flex-col gap-3 border-2 border-amber-400 rounded-lg w-full max-w-sm p-2">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3 border-2 border-amber-400 rounded-lg w-full max-w-sm p-2">
           <h3 className="text-xl">Delivery Information</h3>
           <input type="text"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             placeholder="Full Name"
             className="p-2 text-lg rounded-md" />
+            {errors.fullName && <p>{errors.fullName}</p>}
 
           <input type="text"
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
             placeholder="Phone Number"
             className="p-2 text-lg rounded-md" />
+            {errors.phoneNumber && <p>{errors.phoneNumber}</p>}
 
           <input type="text"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             placeholder="Address"
             className="p-2 text-lg rounded-md" />
+            {errors.address && <p>{errors.address}</p>}
 
           <button type="submit" className="text-lg border border-amber-400 p-1 rounded-md">Add information</button>
         </form>
