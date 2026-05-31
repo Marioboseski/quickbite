@@ -1,4 +1,5 @@
 import { useCart } from "../context/CartContext";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const { cartItems, addToCart, decreaseQuantity } = useCart();
@@ -33,12 +34,13 @@ const Cart = () => {
       )}
       <div className="w-full p-2">
         <div className="flex flex-col gap-3 p-2 border-2 border-amber-400 rounded-md">
-        <h3 className="text-3xl text-center">Cart Review</h3>
-        <div className="flex justify-between items-center">
-          <p className="text-xl">Total</p>
-          <p className="text-xl">${totalPrice.toFixed(2)}</p>
+          <h3 className="text-3xl text-center">Cart Review</h3>
+          <div className="flex justify-between items-center">
+            <p className="text-xl">Total</p>
+            <p className="text-xl">${totalPrice.toFixed(2)}</p>
+          </div>
+          <Link to={"/checkout"}>Checkout</Link>
         </div>
-      </div>
       </div>
     </div>
   );
