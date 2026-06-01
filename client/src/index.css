@@ -7,3 +7,9 @@
     @apply text-white bg-black
   }
 }
+
+@layer components {
+  .input-fields {
+    @apply p-2 text-lg rounded-md bg-black border-2  
+  }
+}
