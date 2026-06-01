@@ -61,24 +61,41 @@ const Checkout = () => {
             onChange={(e) => setFullName(e.target.value)}
             placeholder="Full Name"
             className="p-2 text-lg rounded-md" />
-            {errors.fullName && <p>{errors.fullName}</p>}
+          {errors.fullName && <p>{errors.fullName}</p>}
 
           <input type="text"
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
             placeholder="Phone Number"
             className="p-2 text-lg rounded-md" />
-            {errors.phoneNumber && <p>{errors.phoneNumber}</p>}
+          {errors.phoneNumber && <p>{errors.phoneNumber}</p>}
 
           <input type="text"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             placeholder="Address"
             className="p-2 text-lg rounded-md" />
-            {errors.address && <p>{errors.address}</p>}
+          {errors.address && <p>{errors.address}</p>}
 
           <button type="submit" className="text-lg border border-amber-400 p-1 rounded-md">Add information</button>
         </form>
+      </div>
+
+      <div className="flex flex-col justify-center gap-3">
+        <h3 className="text-xl text-center">Payment Method</h3>
+
+        <div className="flex gap-2">
+          <input type="checkbox" />
+          <p>Cash On Delivery</p>
+        </div>
+
+        <div className="flex gap-2">
+          <input type="checkbox" />
+          <p>Card</p>
+        </div>
+
+        <button>Place Order</button>
+
       </div>
 
     </div>
