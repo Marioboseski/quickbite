@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useCart } from "../context/CartContext";
 import { validateFullName, validateAddress, validatePhoneNumber } from "../utils/validators";
+import { createOrder } from "../services/orderService";
 
 type FormErrors = {
   fullName: string,
@@ -24,8 +25,9 @@ const Checkout = () => {
     phoneNumber: "",
     address: ""
   });
+  const [serverMessage, setServerMessage] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const newErrors = {
@@ -36,6 +38,24 @@ const Checkout = () => {
 
     setErrors(newErrors);
 
+    if (newErrors.fullName || newErrors.phoneNumber ||
+      newErrors.address
+    ) {
+      return;
+    }
+
+    const orderData = {
+      fullName,
+      phoneNumber,
+      address,
+      items: cartItems,
+      totalPrice
+    }
+
+    const res = await createOrder(orderData);
+
+    setServerMessage(res.message);
+
   }
 
   return (
@@ -43,7 +63,7 @@ const Checkout = () => {
 
       <div className="flex flex-col justify-center gap-2 border-b border-white">
         {cartItems.map((item) => (
-          <div className="flex gap-3">
+          <div key={item.id} className="flex gap-3">
             <p className="text-lg">{item.title} x{item.quantity}</p>
             <p className="text-lg">${(item.price * item.quantity).toFixed(2)}</p>
           </div>
@@ -95,6 +115,8 @@ const Checkout = () => {
         </div>
 
         <button>Place Order</button>
+
+        <p className="text-xl text-green-500">{serverMessage}</p>
 
       </div>
 
