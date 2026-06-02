@@ -27,6 +27,7 @@ export const checkout = (req, res) => {
   }
 
   res.status(200).json({
+    success: true,
     message: "Order received"
   });
 

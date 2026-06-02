@@ -11,7 +11,7 @@ type FormErrors = {
 
 const Checkout = () => {
 
-  const { cartItems } = useCart();
+  const { cartItems, clearCart } = useCart();
 
   const totalPrice = cartItems.reduce((total, item) => {
     return total + item.price * item.quantity;
@@ -53,6 +53,10 @@ const Checkout = () => {
     }
 
     const res = await createOrder(orderData);
+
+    if (res.success) {
+      clearCart();
+    }
 
     setServerMessage(res.message);
 
