@@ -6,7 +6,8 @@ import { createOrder } from "../services/orderService";
 type FormErrors = {
   fullName: string,
   phoneNumber: string,
-  address: string
+  address: string,
+  paymentMethod: string
 }
 
 const Checkout = () => {
@@ -23,9 +24,11 @@ const Checkout = () => {
   const [errors, setErrors] = useState<FormErrors>({
     fullName: "",
     phoneNumber: "",
-    address: ""
+    address: "",
+    paymentMethod: ""
   });
   const [serverMessage, setServerMessage] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,13 +36,15 @@ const Checkout = () => {
     const newErrors = {
       fullName: validateFullName(fullName),
       phoneNumber: validatePhoneNumber(phoneNumber),
-      address: validateAddress(address)
+      address: validateAddress(address),
+      paymentMethod: !paymentMethod ? "Please select payment method"
+        : "",
     }
 
     setErrors(newErrors);
 
     if (newErrors.fullName || newErrors.phoneNumber ||
-      newErrors.address
+      newErrors.address || newErrors.paymentMethod
     ) {
       return;
     }
@@ -49,7 +54,8 @@ const Checkout = () => {
       phoneNumber,
       address,
       items: cartItems,
-      totalPrice
+      totalPrice,
+      paymentMethod,
     }
 
     const res = await createOrder(orderData);
@@ -105,14 +111,22 @@ const Checkout = () => {
           <h3 className="text-xl">Payment Method</h3>
 
           <div className="flex gap-2">
-            <input type="radio" />
+            <input type="radio"
+              name="paymentMethod"
+              value={"cash"}
+              onChange={(e) => setPaymentMethod(e.target.value)} />
             <p>Cash On Delivery</p>
           </div>
 
           <div className="flex gap-2">
-            <input type="radio" />
+            <input type="radio"
+              name="paymentMethod"
+              value={"card"}
+              onChange={(e) => setPaymentMethod(e.target.value)} />
             <p>Card</p>
           </div>
+
+          {errors.paymentMethod && <p>{errors.paymentMethod}</p>}
 
           <button type="submit">Place Order</button>
 
