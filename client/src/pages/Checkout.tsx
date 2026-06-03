@@ -62,6 +62,17 @@ const Checkout = () => {
 
     if (res.success) {
       clearCart();
+
+      setFullName("");
+      setPhoneNumber("");
+      setAddress("");
+      
+      setErrors({
+        fullName: "",
+        phoneNumber: "",
+        address: "",
+        paymentMethod: ""
+      });
     }
 
     setServerMessage(res.message);

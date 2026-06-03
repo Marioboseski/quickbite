@@ -1,6 +1,6 @@
 export const checkout = (req, res) => {
 
-  const { fullName, phoneNumber, address, items, totalPrice, paymentMethod } = req.body;
+  const { fullName, phoneNumber, address, items, paymentMethod } = req.body;
 
   if (!fullName) {
     return res.status(400).json({
@@ -34,10 +34,12 @@ export const checkout = (req, res) => {
 
   if (paymentMethod === "cash") {
     return res.status(200).json({
+      success: true,
       message: "Order received successfully, pay on delivery"
     })
   } else if (paymentMethod === "card") {
     return res.status(200).json({
+      success: true,
       message: "Order received successfully.Card payment selected."
     })
   }
