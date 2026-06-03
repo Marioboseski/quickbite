@@ -18,3 +18,14 @@ export type OrderProductItem = {
 export type OrderProductProps = {
   orderProduct: OrderProductItem
 }
+
+export type Product = {
+  id: number,
+  title: string,
+  price: number,
+  category: string
+}
+
+export type CartItem = Product & {
+  quantity: number
+}

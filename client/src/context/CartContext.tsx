@@ -1,17 +1,7 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
+import type { Product, CartItem } from "../types/product";
 
-export type Product = {
-  id: number,
-  title: string,
-  price: number,
-  category: string
-}
-
-export type CartItem = Product & {
-  quantity: number
-}
-
-type CartContextType = {
+export type CartContextType = {
   cartItems: CartItem[],
   addToCart: (product: Product) => void,
   decreaseQuantity: (id: number) => void
