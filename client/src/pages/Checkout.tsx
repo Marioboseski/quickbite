@@ -10,6 +10,19 @@ type FormErrors = {
   paymentMethod: string
 }
 
+const initialFormValues = {
+  fullName: "",
+  phoneNumber: "",
+  address: ""
+}
+
+const initialErrors = {
+  fullName: "",
+  phoneNumber: "",
+  address: "",
+  paymentMethod: ""
+}
+
 const Checkout = () => {
 
   const { cartItems, clearCart } = useCart();
@@ -18,15 +31,8 @@ const Checkout = () => {
     return total + item.price * item.quantity;
   }, 0);
 
-  const [fullName, setFullName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [address, setAddress] = useState("");
-  const [errors, setErrors] = useState<FormErrors>({
-    fullName: "",
-    phoneNumber: "",
-    address: "",
-    paymentMethod: ""
-  });
+  const [formValues, setFormValues] = useState(initialFormValues);
+  const [errors, setErrors] = useState<FormErrors>(initialErrors);
   const [serverMessage, setServerMessage] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
 
@@ -34,9 +40,9 @@ const Checkout = () => {
     e.preventDefault();
 
     const newErrors = {
-      fullName: validateFullName(fullName),
-      phoneNumber: validatePhoneNumber(phoneNumber),
-      address: validateAddress(address),
+      fullName: validateFullName(formValues.fullName),
+      phoneNumber: validatePhoneNumber(formValues.phoneNumber),
+      address: validateAddress(formValues.address),
       paymentMethod: !paymentMethod ? "Please select payment method"
         : "",
     }
@@ -50,9 +56,7 @@ const Checkout = () => {
     }
 
     const orderData = {
-      fullName,
-      phoneNumber,
-      address,
+      ...formValues,
       items: cartItems,
       totalPrice,
       paymentMethod,
@@ -63,20 +67,21 @@ const Checkout = () => {
     if (res.success) {
       clearCart();
 
-      setFullName("");
-      setPhoneNumber("");
-      setAddress("");
-      
-      setErrors({
-        fullName: "",
-        phoneNumber: "",
-        address: "",
-        paymentMethod: ""
-      });
+      setFormValues(initialFormValues);
+
+      setErrors(initialErrors);
     }
 
     setServerMessage(res.message);
 
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setFormValues((prev) => ({
+      ...prev, [name]: value
+    }))
   }
 
   return (
@@ -98,22 +103,25 @@ const Checkout = () => {
         <form onSubmit={handleSubmit} className="flex flex-col gap-3 border-2 border-amber-400 rounded-lg w-full max-w-sm p-2">
           <h3 className="text-xl">Delivery Information</h3>
           <input type="text"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
+            name="fullName"
+            value={formValues.fullName}
+            onChange={handleChange}
             placeholder="Full Name"
             className="input-fields" />
           {errors.fullName && <p>{errors.fullName}</p>}
 
           <input type="text"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
+            name="phoneNumber"
+            value={formValues.phoneNumber}
+            onChange={handleChange}
             placeholder="Phone Number"
             className="input-fields" />
           {errors.phoneNumber && <p>{errors.phoneNumber}</p>}
 
           <input type="text"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
+            name="address"
+            value={formValues.address}
+            onChange={handleChange}
             placeholder="Address"
             className="input-fields" />
           {errors.address && <p>{errors.address}</p>}
