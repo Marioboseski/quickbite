@@ -72,7 +72,13 @@ const Checkout = () => {
       setErrors(initialErrors);
     }
 
-    setServerMessage(res.message);
+    if (res.message) {
+      setServerMessage(res.message);
+
+      setTimeout(() => {
+        setServerMessage("");
+      }, 3000);
+    }
 
   }
 
