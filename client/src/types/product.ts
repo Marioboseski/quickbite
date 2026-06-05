@@ -8,6 +8,7 @@ export type ProductProps = {
 }
 
 export type OrderProductItem = {
+  image: string,
   title: string,
   price: number,
   quantity: number,
