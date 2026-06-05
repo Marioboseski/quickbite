@@ -4,8 +4,9 @@ const OrderProduct = ({ orderProduct }: OrderProductProps) => {
   return (
     <div className="flex justify-between items-center p-1 min-h-24 w-full max-w-sm border rounded-md">
 
+      <img src={orderProduct.image} alt={orderProduct.title} className="w-24 h-24 object-cover rounded-full" />
+      
       <div>
-        <img src={orderProduct.image} alt={orderProduct.title} className="w-20 h-24"/>
         <p>{orderProduct.title}</p>
         <p>${orderProduct.price}</p>
       </div>
