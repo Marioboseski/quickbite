@@ -108,29 +108,36 @@ const Checkout = () => {
       <div className="flex justify-center items-center">
         <form onSubmit={handleSubmit} className="flex flex-col gap-3 border-2 border-amber-400 rounded-lg w-full max-w-sm p-2">
           <h3 className="text-xl">Delivery Information</h3>
-          <input type="text"
-            name="fullName"
-            value={formValues.fullName}
-            onChange={handleChange}
-            placeholder="Full Name"
-            className="input-fields" />
-          {errors.fullName && <p>{errors.fullName}</p>}
 
-          <input type="text"
-            name="phoneNumber"
-            value={formValues.phoneNumber}
-            onChange={handleChange}
-            placeholder="Phone Number"
-            className="input-fields" />
-          {errors.phoneNumber && <p>{errors.phoneNumber}</p>}
+          <div>
+            <input type="text"
+              name="fullName"
+              value={formValues.fullName}
+              onChange={handleChange}
+              placeholder="Full Name"
+              className="input-fields" />
+            {errors.fullName && <p className="text-sm text-red-500">{errors.fullName}</p>}
+          </div>
 
-          <input type="text"
-            name="address"
-            value={formValues.address}
-            onChange={handleChange}
-            placeholder="Address"
-            className="input-fields" />
-          {errors.address && <p>{errors.address}</p>}
+          <div>
+            <input type="text"
+              name="phoneNumber"
+              value={formValues.phoneNumber}
+              onChange={handleChange}
+              placeholder="Phone Number"
+              className="input-fields" />
+            {errors.phoneNumber && <p className="text-sm text-red-500">{errors.phoneNumber}</p>}
+          </div>
+
+          <div>
+            <input type="text"
+              name="address"
+              value={formValues.address}
+              onChange={handleChange}
+              placeholder="Address"
+              className="input-fields" />
+            {errors.address && <p className="text-sm text-red-500">{errors.address}</p>}
+          </div>
 
 
           <h3 className="text-xl">Payment Method</h3>
@@ -151,11 +158,12 @@ const Checkout = () => {
             <p>Card</p>
           </div>
 
-          {errors.paymentMethod && <p>{errors.paymentMethod}</p>}
+          {errors.paymentMethod && <p className="text-sm text-red-500">{errors.paymentMethod}</p>}
 
-          <button type="submit">Place Order</button>
-
-          <p className="text-xl text-green-500">{serverMessage}</p>
+          <div className="flex flex-col items-center gap-3">
+            <button type="submit" className="border-2 border-amber-400 rounded-md w-full max-w-xs p-1 text-lg">Place Order</button>
+            <p className="text-xl text-green-500">{serverMessage}</p>
+          </div>
 
         </form>
       </div>
