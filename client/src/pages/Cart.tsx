@@ -13,7 +13,7 @@ const Cart = () => {
       <h2 className="text-3xl text-amber-400">Cart</h2>
 
       {cartItems.length === 0 ? (
-        <div className="flex justify-center items-center min-h-[70vh]">
+        <div className="flex justify-center items-center min-h-[60vh]">
           <p className="text-3xl">Your cart is empty!</p>
         </div>
       ) : (
