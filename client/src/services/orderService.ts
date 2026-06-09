@@ -10,3 +10,8 @@ export const createOrder = async (orderData: any) => {
   return res.json();
 
 }
+
+export const getOrdersHistory = async () => {
+  const res = await fetch("http://localhost:3000/api/orders");
+  return res.json();
+}

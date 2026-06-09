@@ -1,6 +1,20 @@
+import { orders } from "../data/orders.js";
+
 export const checkout = (req, res) => {
 
   const { fullName, phoneNumber, address, items, paymentMethod } = req.body;
+
+  const newOrder = {
+    id: Date.now(),
+    fullName,
+    phoneNumber,
+    address,
+    paymentMethod,
+    items,
+    createdAt: new Date(),
+  }
+
+  orders.push(newOrder);
 
   if (!fullName) {
     return res.status(400).json({
@@ -49,4 +63,8 @@ export const checkout = (req, res) => {
     message: "Order received"
   });
 
+}
+
+export const ordersHistory = (req, res) => {
+  res.status(200).json(orders);
 }

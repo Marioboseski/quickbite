@@ -31,3 +31,11 @@ export type Product = {
 export type CartItem = Product & {
   quantity: number
 }
+
+export type HistoryOrder = {
+  id: number,
+  fullName: string,
+  phoneNumber: string,
+  address: string,
+  paymentMethod: string,
+}

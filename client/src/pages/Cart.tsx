@@ -41,6 +41,7 @@ const Cart = () => {
             <p className="text-xl">${totalPrice.toFixed(2)}</p>
           </div>
           <Link to={"/checkout"}>Checkout</Link>
+          <Link to={"/ordersHistory"}>View Order History</Link>
         </div>
       </div>
     </div>
