@@ -38,4 +38,6 @@ export type HistoryOrder = {
   phoneNumber: string,
   address: string,
   paymentMethod: string,
+  items: CartItem[],
+  createdAt: string,
 }

@@ -23,12 +23,19 @@ const HistoryOrders = () => {
     <div>
       <p>History orders</p>
       {orders.map((order) => (
-       <div key={order.id}>
-         <p>{order.fullName}</p>
-        <p>{order.phoneNumber}</p>
-        <p>{order.address}</p>
-        <p>{order.paymentMethod}</p>
-       </div>
+        <div key={order.id}>
+          <p>{order.fullName}</p>
+          <p>{order.phoneNumber}</p>
+          <p>{order.address}</p>
+          <p>{order.paymentMethod}</p>
+          {(order.items).map((orderItem) => (
+            <div key={orderItem.id}>
+              <p>{orderItem.title}</p>
+              <p>Quantity: {orderItem.quantity}</p>
+            </div>
+          ))}
+          <p>{new Date(order.createdAt).toLocaleString()}</p>
+        </div>
       ))}
     </div>
   );
