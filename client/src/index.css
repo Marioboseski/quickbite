@@ -9,6 +9,9 @@
 }
 
 @layer components {
+  .container {
+    @apply w-full max-w-[900px] mx-auto
+  }
   .input-fields {
     @apply p-2 text-lg rounded-md bg-black border-2 w-full 
   }

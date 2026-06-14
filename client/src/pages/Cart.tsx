@@ -13,7 +13,7 @@ const Cart = () => {
       <h2 className="text-3xl text-amber-400">Cart</h2>
 
       {cartItems.length === 0 ? (
-        <div className="flex justify-center items-center min-h-[60vh]">
+        <div className="flex justify-center items-center min-h-[60vh] md:min-h-[50vh]">
           <p className="text-3xl">Your cart is empty!</p>
         </div>
       ) : (
@@ -33,15 +33,15 @@ const Cart = () => {
           </div>
         ))
       )}
-      <div className="w-full p-2">
+      <div className="w-full max-w-xl p-2">
         <div className="flex flex-col gap-3 p-2 border-2 border-amber-400 rounded-md">
           <h3 className="text-3xl text-center">Cart Review</h3>
           <div className="flex justify-between items-center">
             <p className="text-xl">Total</p>
             <p className="text-xl">${totalPrice.toFixed(2)}</p>
           </div>
-          <Link to={"/checkout"}>Checkout</Link>
-          <Link to={"/ordersHistory"}>View Order History</Link>
+          <Link to={"/checkout"} className="border border-amber-400 rounded-md p-1 max-w-36 text-center duration-100 hover:scale-105">Checkout</Link>
+          <Link to={"/ordersHistory"} className="border border-amber-400 rounded-md p-1 max-w-48 text-center duration-100 hover:scale-105">View Order History</Link>
         </div>
       </div>
     </div>

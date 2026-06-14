@@ -6,7 +6,7 @@ const NavBar = () => {
   return (
     <header className="sticky top-0 w-full bg-white text-black z-50">
       <nav className="p-3">
-        <ul className="flex justify-around items-center text-xl ">
+        <ul className="flex justify-around items-center text-lg md:text-xl ">
           <Link to={"/home"} className="border-r-2 flex justify-center items-center gap-1"><Hamburger size={30} />QuickBite</Link>
           <Link to={"menu"} className="border-r-2">Menu</Link>
           <Link to={"/orders"}>Orders</Link>
