@@ -1,60 +1,54 @@
-import { useForm } from "../../hooks/useForm";
-import { validateRegisterForm } from "../../utils/validateRegisterForm";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { registerShema, type RegisterFormData } from "../../schemas/registerSchema";
 import { useNavigate } from "react-router-dom";
-
-const initialValues = {
-  name: "",
-  email: "",
-  password: "",
-  city: ""
-}
 
 export const RegisterForm = () => {
 
   const navigate = useNavigate();
 
-  const handleRegister = (values: typeof initialValues) => {
-    console.log(values);
-    
+  const handleRegister = (data: RegisterFormData) => {
+    console.log(data);
+
     navigate("/home");
   }
 
-  const { errors, values, handleChange, handleSubmit } = useForm(initialValues, validateRegisterForm, handleRegister);
+  const { register, handleSubmit, formState: { errors } } = useForm<RegisterFormData>({
+    resolver: zodResolver(registerShema),
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+      city: ""
+    }
+  });
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(handleRegister)}>
         <input type="text"
-          name="name"
-          value={values.name}
-          onChange={handleChange}
           placeholder="Name"
-          className="input-fields" />
-        {errors.name && <p>{errors.name}</p>}
+          className="input-fields"
+          {...register("name")} />
+        {errors.name && <p>{errors.name.message}</p>}
 
         <input type="text"
-          name="email"
-          value={values.email}
-          onChange={handleChange}
           placeholder="Email"
-          className="input-fields" />
-        {errors.email && <p>{errors.email}</p>}
+          className="input-fields"
+          {...register("email")} />
+        {errors.email && <p>{errors.email.message}</p>}
 
         <input type="password"
-          name="password"
-          value={values.password}
-          onChange={handleChange}
           placeholder="********"
-          className="input-fields" />
-        {errors.password && <p>{errors.password}</p>}
+          className="input-fields"
+          {...register("password")} />
+        {errors.password && <p>{errors.password.message}</p>}
 
         <input type="text"
-          name="city"
-          value={values.city}
-          onChange={handleChange}
           placeholder="City"
-          className="input-fields" />
-        {errors.city && <p>{errors.city}</p>}
+          className="input-fields"
+          {...register("city")} />
+        {errors.city && <p>{errors.city.message}</p>}
 
         <button type="submit">Register</button>
 
