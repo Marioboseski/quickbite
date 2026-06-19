@@ -2,15 +2,27 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerShema, type RegisterFormData } from "../../schemas/registerSchema";
 import { useNavigate } from "react-router-dom";
+import { registerUser } from "../../services/authService";
+import { useState } from "react";
 
 export const RegisterForm = () => {
 
   const navigate = useNavigate();
+  const [serverError, setServerError] = useState("");
 
-  const handleRegister = (data: RegisterFormData) => {
-    console.log(data);
+  const handleRegister = async (data: RegisterFormData) => {
+    setServerError("");
 
-    navigate("/home");
+    try {
+      const res = await registerUser(data);
+      console.log(res);
+
+      if (res.user) {
+        navigate("/home");
+      }
+    } catch (error: any) {
+      setServerError(error.message);
+    }
   }
 
   const { register, handleSubmit, formState: { errors } } = useForm<RegisterFormData>({
@@ -51,7 +63,7 @@ export const RegisterForm = () => {
         {errors.city && <p>{errors.city.message}</p>}
 
         <button type="submit">Register</button>
-
+        {serverError && <p className="text-red-500">{serverError}</p>}
       </form>
     </div>
   )

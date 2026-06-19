@@ -2,15 +2,29 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, type LoginFormData } from "../../schemas/loginSchema";
 import { useNavigate } from "react-router-dom";
+import { loginUser } from "../../services/authService";
+import { useState } from "react";
 
 const LoginForm = () => {
 
   const navigate = useNavigate();
+  const [serverError, setServerError] = useState("");
 
-  const handleLogin = (data: LoginFormData) => {
-    console.log(data);
+  const handleLogin = async (data: LoginFormData) => {
+    setServerError("");
+    
+    try {
+      const res = await loginUser(data);
 
-    navigate("/home");
+      console.log(res);
+
+      if (res.user) {
+        navigate("/home");
+      }
+      
+    } catch (error: any) {
+      setServerError(error.message);
+    }
   }
 
   const { register, handleSubmit, formState: { errors } } =
@@ -41,7 +55,7 @@ const LoginForm = () => {
         {errors.password && <p>{errors.password.message}</p>}
 
         <button type="submit">Login</button>
-
+        {serverError && <p className="text-red-500">{serverError}</p>}
       </form>
     </div>
   );
