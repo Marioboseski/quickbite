@@ -4,7 +4,7 @@ import { RegisterForm } from "../components/forms/RegisterForm";
 
 const Auth = () => {
 
-  const [ isLogin, setIsLogin ] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
 
   const toggleAuthMode = () => {
     setIsLogin(prev => !prev);
@@ -13,7 +13,9 @@ const Auth = () => {
   return (
     <div className="flex flex-col justify-center items-center min-h-dvh">
       {isLogin ? <LoginForm /> : <RegisterForm />}
-      <button onClick={toggleAuthMode}>{isLogin ? "Don't have an account? Register." : "Already have an account? Login."}</button>
+      <button onClick={toggleAuthMode} className="border-b w-full max-w-xs p-1">
+        {isLogin ? "Don't have an account? Register" :
+          "Already have an account? Login"}</button>
     </div>
   );
 }

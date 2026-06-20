@@ -15,4 +15,7 @@
   .input-fields {
     @apply p-2 text-lg rounded-md bg-black border-2 w-full 
   }
+  .formInputError {
+    @apply text-sm text-red-500
+  }
 }

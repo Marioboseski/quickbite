@@ -36,34 +36,40 @@ export const RegisterForm = () => {
   });
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(handleRegister)}>
+    <div className="flex flex-col justify-center items-center gap-3 w-full p-2">
+      <h3 className="text-3xl">Welcome to QuickBite!</h3>
+      <p className="text-lg">Create your account and start ordering!</p>
+      <form onSubmit={handleSubmit(handleRegister)} className="flex flex-col justify-evenly min-h-96 w-full max-w-sm border border-gray-400 rounded-md p-2">
+
         <input type="text"
           placeholder="Name"
           className="input-fields"
           {...register("name")} />
-        {errors.name && <p>{errors.name.message}</p>}
+        {errors.name && <p className="formInputError">{errors.name.message}</p>}
 
         <input type="text"
           placeholder="Email"
           className="input-fields"
           {...register("email")} />
-        {errors.email && <p>{errors.email.message}</p>}
+        {errors.email && <p className="formInputError">{errors.email.message}</p>}
 
         <input type="password"
           placeholder="********"
           className="input-fields"
           {...register("password")} />
-        {errors.password && <p>{errors.password.message}</p>}
+        {errors.password && <p className="formInputError">{errors.password.message}</p>}
 
         <input type="text"
           placeholder="City"
           className="input-fields"
           {...register("city")} />
-        {errors.city && <p>{errors.city.message}</p>}
+        {errors.city && <p className="formInputError">{errors.city.message}</p>}
 
-        <button type="submit">Register</button>
-        {serverError && <p className="text-red-500">{serverError}</p>}
+        <div className="flex flex-col justify-center items-center gap-2">
+          <button type="submit" className="border-2 border-amber-400 rounded-md p-1 text-lg w-full max-w-40">Register</button>
+          {serverError && <p className="text-red-500">{serverError}</p>}
+        </div>
+
       </form>
     </div>
   )
