@@ -8,6 +8,8 @@ const Cart = () => {
     return total + item.price * item.quantity;
   }, 0);
 
+  const currentUser = localStorage.getItem("currentUser");
+
   return (
     <div className="flex flex-col items-center gap-3">
       <h2 className="text-3xl text-amber-400">Cart</h2>
@@ -40,7 +42,7 @@ const Cart = () => {
             <p className="text-xl">Total</p>
             <p className="text-xl">${totalPrice.toFixed(2)}</p>
           </div>
-          <Link to={"/checkout"} className="border border-amber-400 rounded-md p-1 max-w-36 text-center duration-100 hover:scale-105">Checkout</Link>
+          <Link to={ currentUser ? "/checkout" : "/register"} className="border border-amber-400 rounded-md p-1 max-w-36 text-center duration-100 hover:scale-105">Checkout</Link>
           <Link to={"/ordersHistory"} className="border border-amber-400 rounded-md p-1 max-w-48 text-center duration-100 hover:scale-105">View Order History</Link>
         </div>
       </div>

@@ -4,6 +4,7 @@ import { registerShema, type RegisterFormData } from "../../schemas/registerSche
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../../services/authService";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export const RegisterForm = () => {
 
@@ -18,7 +19,7 @@ export const RegisterForm = () => {
       console.log(res);
 
       if (res.user) {
-        navigate("/home");
+        navigate("/login");
       }
     } catch (error: any) {
       setServerError(error.message);
@@ -71,6 +72,7 @@ export const RegisterForm = () => {
         </div>
 
       </form>
+      <Link to={"/login"}>Already have an account? Login</Link>
     </div>
   )
 }

@@ -19,7 +19,8 @@ const LoginForm = () => {
       console.log(res);
 
       if (res.user) {
-        navigate("/home");
+        localStorage.setItem("currentUser", JSON.stringify(res.user));
+        navigate("/checkout");
       }
 
     } catch (error: any) {

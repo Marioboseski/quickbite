@@ -4,7 +4,8 @@ import Orders from "./pages/Orders";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import HistoryOrders from "./pages/OrderHistory";
-import Auth from "./pages/Auth";
+import { RegisterForm } from "./components/forms/RegisterForm";
+import LoginForm from "./components/forms/LoginForm";
 import Layout from "./layouts/Layout";
 import { Route, Routes } from "react-router-dom";
 
@@ -14,7 +15,7 @@ const App = () => {
 
       <Route element={<Layout />}>
 
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/cart" element={<Cart />} />
@@ -22,7 +23,8 @@ const App = () => {
         <Route path="/ordersHistory" element={<HistoryOrders />} />
       </Route>
 
-      <Route path="/" element={<Auth />} />
+      <Route path="/register" element={<RegisterForm />} />
+      <Route path="/login" element={<LoginForm />} />
 
     </Routes>
   );
