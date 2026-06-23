@@ -1,14 +1,14 @@
 import { useCart } from "../context/CartContext";
 import { Link } from "react-router-dom";
+import { useUser } from "../context/UserContext";
 
 const Cart = () => {
   const { cartItems, addToCart, decreaseQuantity } = useCart();
+  const { user } = useUser();
 
   const totalPrice = cartItems.reduce((total, item) => {
     return total + item.price * item.quantity;
   }, 0);
-
-  const currentUser = localStorage.getItem("currentUser");
 
   return (
     <div className="flex flex-col items-center gap-3">
@@ -42,7 +42,7 @@ const Cart = () => {
             <p className="text-xl">Total</p>
             <p className="text-xl">${totalPrice.toFixed(2)}</p>
           </div>
-          <Link to={ currentUser ? "/checkout" : "/register"} className="border border-amber-400 rounded-md p-1 max-w-36 text-center duration-100 hover:scale-105">Checkout</Link>
+          <Link to={ user ? "/checkout" : "/register"} className="border border-amber-400 rounded-md p-1 max-w-36 text-center duration-100 hover:scale-105">Checkout</Link>
           <Link to={"/ordersHistory"} className="border border-amber-400 rounded-md p-1 max-w-48 text-center duration-100 hover:scale-105">View Order History</Link>
         </div>
       </div>

@@ -11,6 +11,7 @@ const NavBar = () => {
           <Link to={"menu"} className="border-r-2">Menu</Link>
           <Link to={"/orders"}>Orders</Link>
           <Link to={"/cart"} className="flex flex-col justify-center items-center"><ShoppingCart size={30} />Cart</Link>
+          <Link to={"/profile"}>Profile</Link>
         </ul>
       </nav>
     </header>

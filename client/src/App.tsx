@@ -6,6 +6,7 @@ import Checkout from "./pages/Checkout";
 import HistoryOrders from "./pages/OrderHistory";
 import { RegisterForm } from "./components/forms/RegisterForm";
 import LoginForm from "./components/forms/LoginForm";
+import Profile from "./pages/Profile";
 import Layout from "./layouts/Layout";
 import { Route, Routes } from "react-router-dom";
 
@@ -21,6 +22,8 @@ const App = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/ordersHistory" element={<HistoryOrders />} />
+        <Route path="/profile" element={<Profile />} />
+        
       </Route>
 
       <Route path="/register" element={<RegisterForm />} />

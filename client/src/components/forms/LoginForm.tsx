@@ -4,11 +4,13 @@ import { loginSchema, type LoginFormData } from "../../schemas/loginSchema";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../services/authService";
 import { useState } from "react";
+import { useUser } from "../../context/UserContext";
 
 const LoginForm = () => {
 
   const navigate = useNavigate();
   const [serverError, setServerError] = useState("");
+  const { login } = useUser();
 
   const handleLogin = async (data: LoginFormData) => {
     setServerError("");
@@ -19,7 +21,7 @@ const LoginForm = () => {
       console.log(res);
 
       if (res.user) {
-        localStorage.setItem("currentUser", JSON.stringify(res.user));
+        login(res.user);
         navigate("/checkout");
       }
 
