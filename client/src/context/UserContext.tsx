@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, useContext, useState, type ReactNode } from "react";
 
 type UserProviderProps = {
   children: ReactNode
@@ -22,15 +22,13 @@ export const UserContext = createContext<UserContextType | null>(null);
 
 const UserProvider = ({ children }: UserProviderProps) => {
 
-  const [user, setUser] = useState<User | null>(null);
-
-  useEffect(() => {
+  const [user, setUser] = useState<User | null>(() => {
     const currentUser = localStorage.getItem("currentUser");
 
-    if (currentUser) {
-      setUser(JSON.parse(currentUser));
-    }
-  }, []);
+    return currentUser
+      ? JSON.parse(currentUser)
+      : null;
+  });
 
   const login = (userData: User) => {
     setUser(userData);
