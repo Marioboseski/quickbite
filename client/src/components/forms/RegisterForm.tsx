@@ -37,7 +37,7 @@ export const RegisterForm = () => {
   });
 
   return (
-    <div className="flex flex-col justify-center items-center gap-3 w-full p-2">
+    <div className="flex flex-col justify-center items-center gap-3 w-full p-2 min-h-dvh">
       <h3 className="text-3xl">Welcome to QuickBite!</h3>
       <p className="text-lg">Create your account and start ordering!</p>
       <form onSubmit={handleSubmit(handleRegister)} className="flex flex-col justify-evenly min-h-96 w-full max-w-sm border border-gray-400 rounded-md p-2">

@@ -40,7 +40,7 @@ const LoginForm = () => {
     });
 
   return (
-    <div className="flex flex-col justify-center items-center gap-3 w-full p-2">
+    <div className="flex flex-col justify-center items-center gap-3 w-full p-2  min-h-dvh">
       <h3 className="text-3xl">Welcome back!</h3>
       <p className="text-lg">Login to your account!</p>
       <form onSubmit={handleSubmit(handleLogin)} className="flex flex-col justify-evenly min-h-60 w-full max-w-sm border border-gray-400 rounded-md p-2">
