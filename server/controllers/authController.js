@@ -1,6 +1,7 @@
 import { users } from "../data/users.js";
 import { registerSchema } from "../schemas/registerSchema.js";
 import { loginSchema } from "../schemas/loginSchema.js";
+import jwt from "jsonwebtoken";
 
 export const register = (req, res) => {
   const validationResult = registerSchema.safeParse(req.body);
@@ -62,8 +63,20 @@ export const login = (req, res) => {
     })
   }
 
+  const token = jwt.sign(
+    {
+      id: user.id,
+      email: user.email
+    },
+    "secretkey",
+    {
+      expiresIn: "1d"
+    }
+  );
+
   return res.status(200).json({
     message: "Login successful",
-    user
+    user,
+    token
   });
 }

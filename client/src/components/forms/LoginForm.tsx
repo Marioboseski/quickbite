@@ -22,6 +22,9 @@ const LoginForm = () => {
 
       if (res.user) {
         login(res.user);
+
+        localStorage.setItem("token", res.token);
+        
         navigate("/checkout");
       }
 
