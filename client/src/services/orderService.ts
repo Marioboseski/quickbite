@@ -1,8 +1,11 @@
 export const createOrder = async (orderData: any) => {
+  const token = localStorage.getItem("token");
+
   const res = await fetch("http://localhost:3000/api/orders", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
     },
     body: JSON.stringify(orderData)
   })
@@ -19,6 +22,5 @@ export const getOrdersHistory = async () => {
       Authorization: `Bearer ${token}`
     }
   });
-  
   return res.json();
 }
