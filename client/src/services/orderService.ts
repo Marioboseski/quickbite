@@ -12,6 +12,13 @@ export const createOrder = async (orderData: any) => {
 }
 
 export const getOrdersHistory = async () => {
-  const res = await fetch("http://localhost:3000/api/orders");
+  const token = localStorage.getItem("token");
+
+  const res = await fetch("http://localhost:3000/api/orders", {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+  
   return res.json();
 }

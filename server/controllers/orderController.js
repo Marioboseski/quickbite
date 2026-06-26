@@ -66,5 +66,6 @@ export const checkout = (req, res) => {
 }
 
 export const ordersHistory = (req, res) => {
+  console.log(req.user)
   res.status(200).json(orders);
 }
