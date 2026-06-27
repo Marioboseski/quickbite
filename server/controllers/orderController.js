@@ -3,9 +3,11 @@ import { orders } from "../data/orders.js";
 export const checkout = (req, res) => {
 
   const { fullName, phoneNumber, address, items, paymentMethod } = req.body;
+  const { id } = req.user;
 
   const newOrder = {
     id: Date.now(),
+    userId: id,
     fullName,
     phoneNumber,
     address,
@@ -15,6 +17,7 @@ export const checkout = (req, res) => {
   }
 
   orders.push(newOrder);
+  console.log(newOrder);
 
   if (!fullName) {
     return res.status(400).json({
@@ -66,6 +69,9 @@ export const checkout = (req, res) => {
 }
 
 export const ordersHistory = (req, res) => {
-  console.log(req.user)
-  res.status(200).json(orders);
+  const { id } = req.user;
+
+  const userOrders = orders.filter(order => order.userId === id);
+  
+  res.status(200).json(userOrders);
 }

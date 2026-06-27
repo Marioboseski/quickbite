@@ -43,7 +43,7 @@ const Cart = () => {
             <p className="text-xl">${totalPrice.toFixed(2)}</p>
           </div>
           <Link to={ user ? "/checkout" : "/register"} className="border border-amber-400 rounded-md p-1 max-w-36 text-center duration-100 hover:scale-105">Checkout</Link>
-          <Link to={"/ordersHistory"} className="border border-amber-400 rounded-md p-1 max-w-48 text-center duration-100 hover:scale-105">View Order History</Link>
+          <Link to={ user ? "/ordersHistory" : "/register"} className="border border-amber-400 rounded-md p-1 max-w-48 text-center duration-100 hover:scale-105">View Order History</Link>
         </div>
       </div>
     </div>
