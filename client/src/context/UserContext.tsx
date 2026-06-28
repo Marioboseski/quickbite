@@ -40,6 +40,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
     setUser(null);
 
     localStorage.removeItem("currentUser");
+    localStorage.removeItem("token");
   }
 
   return (
