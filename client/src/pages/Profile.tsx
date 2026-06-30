@@ -1,8 +1,8 @@
-import { useUser } from "../context/UserContext";
+import { useUserStore } from "../store/userStore";
 
 const Profile = () => {
 
-  const { user, logout } = useUser();
+  const { user, logout } = useUserStore();
 
   if (!user) {
     return <p>No user logged in</p>

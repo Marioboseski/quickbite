@@ -4,13 +4,13 @@ import { loginSchema, type LoginFormData } from "../../schemas/loginSchema";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../services/authService";
 import { useState } from "react";
-import { useUser } from "../../context/UserContext";
+import { useUserStore } from "../../store/userStore";
 
 const LoginForm = () => {
 
   const navigate = useNavigate();
   const [serverError, setServerError] = useState("");
-  const { login } = useUser();
+  const { login } = useUserStore();
 
   const handleLogin = async (data: LoginFormData) => {
     setServerError("");
