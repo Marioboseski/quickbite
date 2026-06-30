@@ -1,10 +1,10 @@
 import { menuProducts } from "../data/menuData";
 import OrderProduct from "../components/OrderProduct";
-import { useCart } from "../context/CartContext";
+import { useCartStore } from "../store/cartStore";
 
 const Orders = () => {
 
-  const { addToCart, decreaseQuantity, cartItems } = useCart();
+  const { addToCart, decreaseQuantity, cartItems } = useCartStore();
 
   const categories = ["Burgers", "Gyros", "Drinks", "Sides"];
 

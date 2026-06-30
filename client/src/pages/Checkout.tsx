@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useCart } from "../context/CartContext";
+import { useCartStore } from "../store/cartStore";
 import { validateFullName, validateAddress, validatePhoneNumber } from "../utils/validators";
 import { createOrder } from "../services/orderService";
 
@@ -25,7 +25,7 @@ const initialErrors = {
 
 const Checkout = () => {
 
-  const { cartItems, clearCart } = useCart();
+  const { cartItems, clearCart } = useCartStore();
 
   const totalPrice = cartItems.reduce((total, item) => {
     return total + item.price * item.quantity;

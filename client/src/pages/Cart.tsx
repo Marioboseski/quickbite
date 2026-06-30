@@ -1,9 +1,9 @@
-import { useCart } from "../context/CartContext";
+import { useCartStore } from "../store/cartStore";
 import { Link } from "react-router-dom";
 import { useUser } from "../context/UserContext";
 
 const Cart = () => {
-  const { cartItems, addToCart, decreaseQuantity } = useCart();
+  const { cartItems, addToCart, decreaseQuantity } = useCartStore();
   const { user } = useUser();
 
   const totalPrice = cartItems.reduce((total, item) => {
