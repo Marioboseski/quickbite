@@ -17,7 +17,7 @@ const Orders = () => {
 
           <h3 className="text-xl text-amber-400">{category}</h3>
 
-          <div className="flex flex-col items-center gap-3">
+          <div className="grid grid-cols-1 gap-3 justify-items-center md:grid-cols-2 lg:grid-cols-3">
             {menuProducts.filter((product) => product.category === category)
               .map((product) => {
 
