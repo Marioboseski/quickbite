@@ -34,6 +34,7 @@ export const useUserStore = create<UserStore>((set) => ({
     });
     localStorage.removeItem("currentUser");
     localStorage.removeItem("token");
+    localStorage.removeItem("profileImage");
   },
 
 }));

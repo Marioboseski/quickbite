@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div className="flex justify-center items-center min-h-[90vh] p-2">
+    <div className="flex justify-center items-center min-h-[90vh] p-2 md:min-h-[85vh]">
       <div className="flex flex-col text-center gap-3">
         <div className="flex flex-col justify-center items-center gap-3">
           <h1 className="text-4xl text-amber-400">Welcome to Quick Bite</h1>
