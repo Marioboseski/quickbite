@@ -36,22 +36,26 @@ const Profile = () => {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center gap-3 min-h-[70vh]">
-      <label className="flex justify-center items-center text-3xl w-full max-w-44 min-h-44 bg-amber-400 rounded-full cursor-pointer overflow-hidden">
-        <input
-          type="file"
-          accept="image/*"
-          hidden
-          onChange={handleImageChange} />
-        {profileImage ? (
-          <img src={profileImage} alt="profileImg" className="min-h-44 min-w-44 object-cover" />
-        ) : (
-          firstLetter
-        )}
-      </label>
-      <p>Name: {user.name}</p>
-      <p>Email: {user.email}</p>
-      <p>Location: {user?.city}</p>
+    <div className="flex flex-col justify-center items-center gap-3 p-3 min-h-[70vh]">
+      <div className="flex justify-around items-center border-2 border-gray-500 rounded-md w-full p-2">
+        <label className="flex justify-center items-center text-3xl w-full max-w-24 min-h-24 bg-amber-400 rounded-full cursor-pointer overflow-hidden">
+          <input
+            type="file"
+            accept="image/*"
+            hidden
+            onChange={handleImageChange} />
+          {profileImage ? (
+            <img src={profileImage} alt="profileImg" className="min-h-24 min-w-24 object-cover" />
+          ) : (
+            firstLetter
+          )}
+        </label>
+        <div className="flex flex-col justify-center items-start">
+          <p className="text-xl border-b">{user.name}</p>
+          <p className="text-xl border-b">{user.email}</p>
+          <p className="text-xl border-b">{user.city}</p>
+        </div>
+      </div>
       <button onClick={logout} className="text-red-400 border-2 border-red-500 rounded-md p-1 w-full max-w-28 hover:bg-red-500 hover:text-white">Logout</button>
     </div>
   );
