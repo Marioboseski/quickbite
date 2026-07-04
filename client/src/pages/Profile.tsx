@@ -1,6 +1,8 @@
 import { useUserStore } from "../store/userStore";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import ProfileImageModal from "../components/ProfileImageModal";
+import { useRef } from "react";
 
 const Profile = () => {
 
@@ -8,6 +10,8 @@ const Profile = () => {
   const [profileImage, setProfileImage] = useState<string | null>(() => {
     return localStorage.getItem("profileImage");
   });
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   if (!user) {
     return (
@@ -31,15 +35,28 @@ const Profile = () => {
       const image = reader.result as string;
       setProfileImage(image);
       localStorage.setItem("profileImage", image);
+      setIsModalOpen(false);
     }
     reader.readAsDataURL(file);
+  }
+
+  const handleChangePhoto = () => {
+    fileInputRef.current?.click();
+  }
+
+  const handleDeletePhoto = () => {
+    setProfileImage(null);
+    localStorage.removeItem("profileImage");
+    setIsModalOpen(false);
   }
 
   return (
     <div className="flex flex-col justify-center items-center gap-3 p-3 min-h-[70vh]">
       <div className="flex justify-around items-center border-2 border-gray-500 rounded-md w-full p-2">
-        <label className="flex justify-center items-center text-3xl w-full max-w-24 min-h-24 bg-amber-400 rounded-full cursor-pointer overflow-hidden">
+        <label onClick={() => setIsModalOpen(true)}
+          className="flex justify-center items-center text-3xl w-full max-w-24 min-h-24 bg-amber-400 rounded-full cursor-pointer overflow-hidden">
           <input
+            ref={fileInputRef}
             type="file"
             accept="image/*"
             hidden
@@ -57,6 +74,12 @@ const Profile = () => {
         </div>
       </div>
       <button onClick={logout} className="text-red-400 border-2 border-red-500 rounded-md p-1 w-full max-w-28 hover:bg-red-500 hover:text-white">Logout</button>
+      <ProfileImageModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        profileImage={profileImage}
+        onChangePhoto={handleChangePhoto}
+        onDeletePhoto={handleDeletePhoto} />
     </div>
   );
 }
