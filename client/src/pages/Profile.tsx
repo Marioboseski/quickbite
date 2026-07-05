@@ -52,7 +52,7 @@ const Profile = () => {
 
   return (
     <div className="flex flex-col justify-center items-center gap-3 p-3 min-h-[70vh]">
-      <div className="flex justify-around items-center border-2 border-gray-500 rounded-md w-full p-2">
+      <div className="flex justify-around items-center border-2 border-gray-500 rounded-md w-full max-w-sm min-h-48 p-2 md:max-w-xl">
         <div onClick={() => setIsModalOpen(true)}
           className="flex justify-center items-center text-3xl w-full max-w-24 min-h-24 bg-amber-400 rounded-full cursor-pointer overflow-hidden">
           <input

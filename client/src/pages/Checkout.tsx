@@ -91,9 +91,9 @@ const Checkout = () => {
   }
 
   return (
-    <div className="flex flex-col gap-3 p-2">
+    <div className="flex flex-col justify-center items-center gap-3 p-2">
 
-      <div className="flex flex-col justify-center gap-2 border-b border-white">
+      <div className="flex flex-col justify-center items-start gap-2 border-b border-white w-full max-w-sm">
         {cartItems.map((item) => (
           <div key={item.id} className="flex gap-3">
             <p className="text-lg">{item.title} x{item.quantity}</p>
@@ -105,7 +105,7 @@ const Checkout = () => {
         <p className="text-lg">Total price: ${(totalPrice).toFixed(2)}</p>
       </div>
 
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center w-full">
         <form onSubmit={handleSubmit} className="flex flex-col gap-3 border-2 border-amber-400 rounded-lg w-full max-w-sm p-2">
           <h3 className="text-xl">Delivery Information</h3>
 
@@ -161,7 +161,7 @@ const Checkout = () => {
           {errors.paymentMethod && <p className="text-sm text-red-500">{errors.paymentMethod}</p>}
 
           <div className="flex flex-col items-center gap-3">
-            <button type="submit" className="border-2 border-amber-400 rounded-md w-full max-w-xs p-1 text-lg">Place Order</button>
+            <button type="submit" className="border-2 border-amber-400 rounded-md w-full max-w-xs p-1 text-lg duration-100 hover:scale-105">Place Order</button>
             <p className="text-xl text-green-500">{serverMessage}</p>
           </div>
 
