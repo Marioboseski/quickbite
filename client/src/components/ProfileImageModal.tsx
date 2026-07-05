@@ -23,7 +23,7 @@ const ProfileImageModal = ({ isOpen, onClose, profileImage, onChangePhoto, onDel
         <div className="flex justify-center">
           {profileImage ? (
             <img src={profileImage} alt="profileImg"
-              className="min-h-44 min-w-44 object-cover rounded-full"
+              className="min-h-44 max-h-48 min-w-44 max-w-48 object-cover rounded-full"
             />
           ) : (
             <div className="flex justify-center items-center w-44 h-44 rounded-full bg-amber-400 text-6xl">

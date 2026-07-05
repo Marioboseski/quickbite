@@ -53,7 +53,7 @@ const Profile = () => {
   return (
     <div className="flex flex-col justify-center items-center gap-3 p-3 min-h-[70vh]">
       <div className="flex justify-around items-center border-2 border-gray-500 rounded-md w-full p-2">
-        <label onClick={() => setIsModalOpen(true)}
+        <div onClick={() => setIsModalOpen(true)}
           className="flex justify-center items-center text-3xl w-full max-w-24 min-h-24 bg-amber-400 rounded-full cursor-pointer overflow-hidden">
           <input
             ref={fileInputRef}
@@ -62,11 +62,11 @@ const Profile = () => {
             hidden
             onChange={handleImageChange} />
           {profileImage ? (
-            <img src={profileImage} alt="profileImg" className="min-h-24 min-w-24 object-cover" />
+            <img src={profileImage} alt="profileImg" className="min-h-24 max-h-28 min-w-24 object-cover" />
           ) : (
             firstLetter
           )}
-        </label>
+        </div>
         <div className="flex flex-col justify-center items-start">
           <p className="text-xl border-b">{user.name}</p>
           <p className="text-xl border-b">{user.email}</p>
