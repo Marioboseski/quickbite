@@ -3,7 +3,11 @@ import { z } from "zod";
 export const registerShema = z.object({
   name: z.string().min(1, "Name is required"),
 
-  email: z.string().min(1, "Email is required").email("Enter valid email"),
+  email: z.string().min(1, "Email is required").check(
+    z.email({
+      message: "Enter valid email"
+    })
+  ),
 
   password: z.string().min(6, "Password must be at least 6 characters")
   .regex(/[A-Z]/, "At least one uppercase letter required")
