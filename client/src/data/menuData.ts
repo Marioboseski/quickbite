@@ -37,7 +37,7 @@ export const menuProducts = [
     id: 3,
     image: baconBurger,
     title: "Bacon Burger",
-    price: 5,
+    price: 7,
     category: "Burgers"
   },
 
@@ -45,7 +45,7 @@ export const menuProducts = [
     id: 4,
     image: doubleBurger,
     title: "Double Burger",
-    price: 7,
+    price: 8,
     category: "Burgers"
   },
 
@@ -101,7 +101,7 @@ export const menuProducts = [
     id: 11,
     image: pepsi,
     title: "Pepsi",
-    price: 1.90,
+    price: 1.9,
     category: "Drinks"
   },
 
@@ -125,7 +125,7 @@ export const menuProducts = [
     id: 14,
     image: fries,
     title: "Fries",
-    price: 1,
+    price: 2,
     category: "Sides"
   },
 
@@ -133,7 +133,7 @@ export const menuProducts = [
     id: 15,
     image: nuggets,
     title: "Nuggets",
-    price: 1,
+    price: 3,
     category: "Sides"
   },
 
@@ -141,7 +141,7 @@ export const menuProducts = [
     id: 16,
     image: sauce,
     title: "Sauce",
-    price: 1,
+    price: 0.5,
     category: "Sides"
   }
 ]

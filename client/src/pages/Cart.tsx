@@ -26,7 +26,7 @@ const Cart = () => {
               <img src={item.image} alt="" className="w-24 h-24 object-cover" />
               <div>
                 <p>{item.title}</p>
-                <p>${item.price}</p>
+                <p>${item.price.toFixed(2)}</p>
               </div>
               <div className="flex justify-around items-center p-2 w-full max-w-24">
                 <button onClick={() => decreaseQuantity(item.id)} className="border w-1/2 p-1">-</button>

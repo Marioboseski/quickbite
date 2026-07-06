@@ -39,7 +39,7 @@ const HistoryOrders = () => {
             <div key={orderItem.id}>
               <p>Product: {orderItem.title}</p>
               <p>Quantity: {orderItem.quantity}</p>
-              <p>Price: ${orderItem.price * orderItem.quantity}</p>
+              <p>Price: ${(orderItem.price * orderItem.quantity).toFixed(2)}</p>
             </div>
           ))}
           <p>Payment method: {order.paymentMethod}</p>

@@ -8,7 +8,7 @@ const OrderProduct = ({ orderProduct }: OrderProductProps) => {
       
       <div>
         <p>{orderProduct.title}</p>
-        <p>${orderProduct.price}</p>
+        <p>${orderProduct.price.toFixed(2)}</p>
       </div>
 
       <div className="flex justify-around items-center p-2 w-full max-w-24 ">
