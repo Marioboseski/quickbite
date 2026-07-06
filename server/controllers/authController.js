@@ -70,7 +70,7 @@ export const login = (req, res) => {
     },
     "secretkey",
     {
-      expiresIn: "1d"
+      expiresIn: "30d"
     }
   );
 

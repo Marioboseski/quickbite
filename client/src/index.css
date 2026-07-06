@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scrollbar-gutter: stable;
+}
+
 @layer base {
   body {
     @apply text-white bg-black
@@ -12,9 +16,11 @@
   .container {
     @apply w-full max-w-[900px] mx-auto
   }
+
   .input-fields {
-    @apply p-2 text-lg rounded-md bg-black border-2 w-full 
+    @apply p-2 text-lg rounded-md bg-black border-2 w-full
   }
+
   .formInputError {
     @apply text-sm text-red-500
   }

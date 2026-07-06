@@ -18,6 +18,14 @@ const HistoryOrders = () => {
 
   }, []);
 
+  if (orders.length === 0) {
+    return (
+      <div className="flex justify-center items-center">
+        <p className="text-3xl">No order history yet</p>
+      </div>
+    )
+  }
+
 
   return (
     <div className="flex flex-col justify-center gap-3 p-2">
