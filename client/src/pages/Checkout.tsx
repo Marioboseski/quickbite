@@ -9,6 +9,8 @@ const Checkout = () => {
 
   const { cartItems, clearCart } = useCartStore();
 
+  const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0)
+
   const totalPrice = cartItems.reduce((total, item) => {
     return total + item.price * item.quantity;
   }, 0);
@@ -61,7 +63,7 @@ const Checkout = () => {
           </div>
         ))}
 
-        <p className="text-lg">Items: {cartItems.length}</p>
+        <p className="text-lg">Items: {totalItems}</p>
         <p className="text-lg">Total price: ${(totalPrice).toFixed(2)}</p>
       </div>
 
