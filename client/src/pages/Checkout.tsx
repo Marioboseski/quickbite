@@ -1,27 +1,9 @@
 import { useState } from "react";
 import { useCartStore } from "../store/cartStore";
-import { validateFullName, validateAddress, validatePhoneNumber } from "../utils/validators";
 import { createOrder } from "../services/orderService";
-
-type FormErrors = {
-  fullName: string,
-  phoneNumber: string,
-  address: string,
-  paymentMethod: string
-}
-
-const initialFormValues = {
-  fullName: "",
-  phoneNumber: "",
-  address: ""
-}
-
-const initialErrors = {
-  fullName: "",
-  phoneNumber: "",
-  address: "",
-  paymentMethod: ""
-}
+import { checkoutSchema, type CheckoutFormData } from "../schemas/checkoutSchema";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const Checkout = () => {
 
@@ -31,45 +13,31 @@ const Checkout = () => {
     return total + item.price * item.quantity;
   }, 0);
 
-  const [formValues, setFormValues] = useState(initialFormValues);
-  const [errors, setErrors] = useState<FormErrors>(initialErrors);
   const [serverMessage, setServerMessage] = useState("");
-  const [paymentMethod, setPaymentMethod] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const { register, handleSubmit, reset, formState: { errors }, } =
+    useForm<CheckoutFormData>({
+      resolver: zodResolver(checkoutSchema),
+      defaultValues: {
+        fullName: "",
+        phoneNumber: "",
+        address: "",
+      },
+    });
 
-    const newErrors = {
-      fullName: validateFullName(formValues.fullName),
-      phoneNumber: validatePhoneNumber(formValues.phoneNumber),
-      address: validateAddress(formValues.address),
-      paymentMethod: !paymentMethod ? "Please select payment method"
-        : "",
-    }
-
-    setErrors(newErrors);
-
-    if (newErrors.fullName || newErrors.phoneNumber ||
-      newErrors.address || newErrors.paymentMethod
-    ) {
-      return;
-    }
+  const onSubmit = async (data: CheckoutFormData) => {
 
     const orderData = {
-      ...formValues,
+      ...data,
       items: cartItems,
       totalPrice,
-      paymentMethod,
     }
 
     const res = await createOrder(orderData);
 
     if (res.success) {
       clearCart();
-
-      setFormValues(initialFormValues);
-
-      setErrors(initialErrors);
+      reset();
     }
 
     if (res.message) {
@@ -80,14 +48,6 @@ const Checkout = () => {
       }, 3000);
     }
 
-  }
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-
-    setFormValues((prev) => ({
-      ...prev, [name]: value
-    }))
   }
 
   return (
@@ -106,61 +66,52 @@ const Checkout = () => {
       </div>
 
       <div className="flex justify-center items-center w-full">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3 border-2 border-amber-400 rounded-lg w-full max-w-sm p-2">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3 border-2 border-amber-400 rounded-lg w-full max-w-sm p-2">
           <h3 className="text-xl">Delivery Information</h3>
 
           <div>
             <input type="text"
-              name="fullName"
-              value={formValues.fullName}
-              onChange={handleChange}
               placeholder="Full Name"
-              className="input-fields" />
-            {errors.fullName && <p className="text-sm text-red-500">{errors.fullName}</p>}
+              className="input-fields"
+              {...register("fullName")} />
+            {errors.fullName && <p className="text-sm text-red-500">{errors.fullName.message}</p>}
           </div>
 
           <div>
             <input type="text"
-              name="phoneNumber"
-              value={formValues.phoneNumber}
-              onChange={handleChange}
               placeholder="Phone Number"
-              className="input-fields" />
-            {errors.phoneNumber && <p className="text-sm text-red-500">{errors.phoneNumber}</p>}
+              className="input-fields"
+              {...register("phoneNumber")} />
+            {errors.phoneNumber && <p className="text-sm text-red-500">{errors.phoneNumber.message}</p>}
           </div>
 
           <div>
             <input type="text"
-              name="address"
-              value={formValues.address}
-              onChange={handleChange}
               placeholder="Address"
-              className="input-fields" />
-            {errors.address && <p className="text-sm text-red-500">{errors.address}</p>}
+              className="input-fields"
+              {...register("address")} />
+            {errors.address && <p className="text-sm text-red-500">{errors.address.message}</p>}
           </div>
-
 
           <h3 className="text-xl">Payment Method</h3>
 
           <div className="flex gap-2">
             <input type="radio"
-              name="paymentMethod"
               value={"cash"}
-              onChange={(e) => setPaymentMethod(e.target.value)} />
+              {...register("paymentMethod")} />
             <p>Cash On Delivery</p>
           </div>
 
           <div className="flex gap-2">
             <input type="radio"
-              name="paymentMethod"
               value={"card"}
-              onChange={(e) => setPaymentMethod(e.target.value)} />
+              {...register("paymentMethod")} />
             <p>Card</p>
           </div>
 
-          {errors.paymentMethod && <p className="text-sm text-red-500">{errors.paymentMethod}</p>}
+          {errors.paymentMethod && <p className="text-sm text-red-500">{errors.paymentMethod.message}</p>}
 
-          <div className="flex flex-col items-center gap-3">
+          <div className="flex flex-col justify-center items-center text-center gap-3">
             <button type="submit" className="border-2 border-amber-400 rounded-md w-full max-w-xs p-1 text-lg duration-100 hover:scale-105">Place Order</button>
             <p className="text-xl text-green-500">{serverMessage}</p>
           </div>
